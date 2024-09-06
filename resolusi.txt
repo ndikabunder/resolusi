@@ -2,3 +2,5 @@ Resolusi
 -- Belajar terus tentang game development
 -- Selesaikan kelas havard
 -- Membuat game sendiri
+-- Membuat game android
+-- Upload game di google play

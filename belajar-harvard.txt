@@ -2,5 +2,6 @@ Game Harvard
 -- Pong (Sudah selesai)
 -- Flappy Bird (Masih dikerjakan)
 Akan membuat game harvard baru
+-- Zelda
+-- Angry Bird
 -- Breakout
--- Match 3

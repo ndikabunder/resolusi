@@ -1,6 +1,8 @@
 Game Harvard
 -- Pong (Sudah selesai)
+    -- Sudah diberikan keterangan
 -- Flappy Bird (Masih dikerjakan)
 Akan membuat game harvard baru
 -- Breakout
 -- Match 3
+-- Mario

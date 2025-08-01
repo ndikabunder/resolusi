@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glyphguardian: Echoes of Light</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="title-screen" class="screen active">
+            <div class="title-content">
+                <h1>Glyphguardian</h1>
+                <h2>Echoes of Light</h2>
+                <p>As the last guardian, use your sacred bow and ancient Glyphs to defend the Core of Light from endless waves of shadow creatures.</p>
+                <button id="start-game">Start Game</button>
+                <button id="show-tutorial">How to Play</button>
+            </div>
+        </div>
+
+        <div id="tutorial-screen" class="screen">
+            <div class="tutorial-content">
+                <h2>How to Play</h2>
+                <div class="controls">
+                    <h3>Controls:</h3>
+                    <p><strong>WASD</strong> - Move Glyphguardian</p>
+                    <p><strong>Mouse</strong> - Aim</p>
+                    <p><strong>Left Click</strong> - Shoot Arrow</p>
+                    <p><strong>1-4</strong> - Place Glyphs</p>
+                    <p><strong>Space</strong> - Special Ability</p>
+                </div>
+                <div class="gameplay">
+                    <h3>Gameplay:</h3>
+                    <p>• Defend the Aethel Core from shadow creatures</p>
+                    <p>• Place Glyphs strategically to control enemies</p>
+                    <p>• Earn Lumen to upgrade between waves</p>
+                    <p>• Survive as long as possible!</p>
+                </div>
+                <button id="back-to-menu">Back to Menu</button>
+            </div>
+        </div>
+
+        <div id="game-screen" class="screen">
+            <div id="hud">
+                <div id="stats">
+                    <div class="stat">
+                        <span class="label">HP:</span>
+                        <div class="bar">
+                            <div id="player-hp" class="fill"></div>
+                        </div>
+                        <span id="hp-text">100/100</span>
+                    </div>
+                    <div class="stat">
+                        <span class="label">Core:</span>
+                        <div class="bar">
+                            <div id="core-hp" class="fill core"></div>
+                        </div>
+                        <span id="core-text">100/100</span>
+                    </div>
+                    <div class="stat">
+                        <span class="label">Wave:</span>
+                        <span id="wave-number">1</span>
+                    </div>
+                    <div class="stat">
+                        <span class="label">Lumen:</span>
+                        <span id="lumen-count">0</span>
+                    </div>
+                </div>
+                
+                <div id="glyphs">
+                    <div class="glyph-slot" data-glyph="0">
+                        <div class="glyph-icon stasis"></div>
+                        <div class="glyph-key">1</div>
+                        <div class="glyph-count">3</div>
+                    </div>
+                    <div class="glyph-slot" data-glyph="1">
+                        <div class="glyph-icon sundering"></div>
+                        <div class="glyph-key">2</div>
+                        <div class="glyph-count">2</div>
+                    </div>
+                    <div class="glyph-slot" data-glyph="2">
+                        <div class="glyph-icon warding"></div>
+                        <div class="glyph-key">3</div>
+                        <div class="glyph-count">2</div>
+                    </div>
+                    <div class="glyph-slot" data-glyph="3">
+                        <div class="glyph-icon haste"></div>
+                        <div class="glyph-key">4</div>
+                        <div class="glyph-count">1</div>
+                    </div>
+                </div>
+                
+                <div id="abilities">
+                    <div class="ability" id="special-ability">
+                        <div class="ability-icon"></div>
+                        <div class="ability-key">SPACE</div>
+                        <div class="cooldown-overlay"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <canvas id="game-canvas" width="1200" height="800"></canvas>
+            
+            <div id="wave-announcement" class="announcement">
+                <h2 id="wave-title">Wave 1 Incoming!</h2>
+                <p id="wave-subtitle">Prepare your defenses</p>
+            </div>
+        </div>
+
+        <div id="shop-screen" class="screen">
+            <div class="shop-content">
+                <h2>Upgrade Shop</h2>
+                <div class="shop-currency">
+                    <span>Lumen: <span id="shop-lumen">0</span></span>
+                </div>
+                <div class="shop-items">
+                    <div class="shop-category">
+                        <h3>Glyphs</h3>
+                        <div class="shop-item" data-item="glyph-stasis">
+                            <div class="item-icon stasis"></div>
+                            <div class="item-info">
+                                <h4>Stasis Glyph</h4>
+                                <p>Slows enemies by 50%</p>
+                                <span class="price">50 Lumen</span>
+                            </div>
+                            <button class="buy-btn">Buy</button>
+                        </div>
+                        <div class="shop-item" data-item="glyph-sundering">
+                            <div class="item-icon sundering"></div>
+                            <div class="item-info">
+                                <h4>Sundering Glyph</h4>
+                                <p>Explodes when enemies approach</p>
+                                <span class="price">75 Lumen</span>
+                            </div>
+                            <button class="buy-btn">Buy</button>
+                        </div>
+                    </div>
+                    <div class="shop-category">
+                        <h3>Upgrades</h3>
+                        <div class="shop-item" data-item="damage">
+                            <div class="item-icon damage"></div>
+                            <div class="item-info">
+                                <h4>Arrow Power</h4>
+                                <p>Increase arrow damage by 25%</p>
+                                <span class="price">100 Lumen</span>
+                            </div>
+                            <button class="buy-btn">Buy</button>
+                        </div>
+                        <div class="shop-item" data-item="speed">
+                            <div class="item-icon speed"></div>
+                            <div class="item-info">
+                                <h4>Swift Feet</h4>
+                                <p>Increase movement speed by 20%</p>
+                                <span class="price">80 Lumen</span>
+                            </div>
+                            <button class="buy-btn">Buy</button>
+                        </div>
+                    </div>
+                </div>
+                <button id="continue-game">Continue</button>
+            </div>
+        </div>
+
+        <div id="game-over-screen" class="screen">
+            <div class="game-over-content">
+                <h2>The Light Fades</h2>
+                <p>You defended the Aethel Core for <span id="final-wave">0</span> waves</p>
+                <div class="final-stats">
+                    <p>Enemies Defeated: <span id="final-kills">0</span></p>
+                    <p>Lumen Earned: <span id="final-lumen">0</span></p>
+                </div>
+                <button id="restart-game">Try Again</button>
+                <button id="back-to-main">Main Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
